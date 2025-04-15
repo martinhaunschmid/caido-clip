@@ -21,3 +21,4 @@ Things I will add along the line (some depend on the development of the Caido ec
 - Saving Clipboards in a SQLite database, preferrably on a per-project basis
 - Having a dedicated space in the UI for the names or values of the clipboards, e.g. in the status bar in the bottom of Caido
 - Being able to chain Workflows behind clipboards, essentially giving you hotkeys for running workflows like conversion or getting a new access token.
+- Improve error handling

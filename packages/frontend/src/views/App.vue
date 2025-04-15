@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import Button from "primevue/button";
 import InputText from "primevue/inputtext";
-import Card from "primevue/Card";
-import TextArea from "primevue/TextArea";
+import Card from "primevue/card";
+import TextArea from "primevue/textarea";
 
 import { useSDK } from "@/plugins/sdk";
 import { CaidoClipboard } from "../types";
