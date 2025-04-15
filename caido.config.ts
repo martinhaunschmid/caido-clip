@@ -10,13 +10,13 @@ import prefixwrap from "postcss-prefixwrap";
 const id = "frontend-vue";
 export default defineConfig({
   id,
-  name: "Frontend Vue",
-  description: "Plugin template with frontend using VueJS",
-  version: "0.0.0",
+  name: "caido-clip",
+  description: "Plugin to enable several clipboards.",
+  version: "0.0.1",
   author: {
-    name: "Caido Labs Inc.",
-    email: "dev@caido.io",
-    url: "https://caido.io",
+    name: "ntrm",
+    email: "martin@adversary.at",
+    url: "https://adversary.at",
   },
   plugins: [
     {
@@ -51,7 +51,7 @@ export default defineConfig({
             plugins: [
               // This plugin wraps the root element in a unique ID
               // This is necessary to prevent styling conflicts between plugins
-              prefixwrap(`#plugin--${id}`),
+              prefixwrap(`#caido-clip--${id}`),
 
               tailwindcss({
                 corePlugins: {

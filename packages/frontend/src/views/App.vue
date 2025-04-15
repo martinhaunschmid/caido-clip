@@ -1,28 +1,55 @@
 <script setup lang="ts">
 import Button from "primevue/button";
 import InputText from "primevue/inputtext";
+import Card from "primevue/Card";
+import TextArea from "primevue/TextArea";
 
 import { useSDK } from "@/plugins/sdk";
-
-import { ref } from "vue";
+import { CaidoClipboard } from "../types";
+import { ref, onMounted } from "vue";
+import { initCaidoClipCommands, refreshClipboards } from "../index"
 
 // Retrieve the SDK instance to interact with the backend
 const sdk = useSDK();
 
-const myVar = ref("Hello World");
+let clipboards = ref<CaidoClipboard[]>([])
 
-// Call the backend to generate a random string
-const onGenerateClick = async () => {
-  const result = await sdk.backend.generateRandomString(10);
-  myVar.value = result;
-};
+sdk.storage.onChange((storage) => {
+  clipboards.value = (storage as PluginStorage | undefined)?.clipboards || []
+});
+
+const onValueChange  = (clip : CaidoClipboard) => {
+  sdk.backend.saveClipboard(clip);
+  refreshClipboards(sdk)
+}
 </script>
 
 <template>
-  <div class="h-full flex justify-center items-center">
-    <div class="flex flex-col gap-1">
-      <Button label="Generate random string" @click="onGenerateClick" />
-      <InputText :model-value="myVar" readonly />
-    </div>
+  <Card class="gap-4 mb-4">
+    <template #title>Caido Clipboards</template>
+    <template #content>
+      <p>Here, you can see the values present in each of the clipboards and name them. The names are then visible in the Command Palette.</p>
+    </template>
+  </Card>
+  <div class="flex flex-wrap" id="caido-clip-wrap">
+    <div
+      v-for="clip in clipboards"
+      :key="clip.id"
+      class="w-1/2 gap-4"
+    >
+    <Card class="flex items-start mx-2 mb-4">
+      <template #title>Clipboard {{ clip.id }}: {{ clip.name || "not named" }}</template>
+      <template #content>
+          <InputText placeholder="Clipboard name" v-model="clip.name" type="text" @change="onValueChange(clip)" class="w-full mb-4"/>
+          <TextArea
+            v-model="clip.value"
+            placeholder="Enter value..."
+            @change="onValueChange(clip)"
+            class="w-full"
+          ></TextArea>
+      </template>
+    </Card>
   </div>
+</div>
 </template>
+      
