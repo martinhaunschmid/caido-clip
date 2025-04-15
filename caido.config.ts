@@ -10,13 +10,13 @@ import prefixwrap from "postcss-prefixwrap";
 const id = "frontend-vue";
 export default defineConfig({
   id,
-  name: "caido-clip",
+  name: "Caido Clip",
   description: "Plugin to enable several clipboards.",
   version: "0.0.1",
   author: {
     name: "ntrm",
-    email: "martin@adversary.at",
-    url: "https://adversary.at",
+    email: "contact@martinhaunschmid.com",
+    url: "https://martinhaunschmid.com",
   },
   plugins: [
     {
